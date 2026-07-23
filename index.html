@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENIKRO TRAINING CENTRE</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url(BebasNeue-Regular.ttf) format('truetype');
+}
+
+/* ඊට පස්සේ ඔයාට ඕන කරන තැනකට මේ විදිහට දෙන්න */
+h1 {
+    font-family: 'MyCustomFont', BebasNeue-Regular;
+}
+       /* Core Theme Colors (Default: Dark) - Phone friendly adjustments */
+        :root {
+            --primary: #e65c00; /* ටිකක් Soft Orange එකක් (අඩුවෙන් බබළන) */
+            --primary-glow: rgba(230, 92, 0, 0.3); /* Glow එක බාගෙට බස්සා ඇත */
+            --bg-dark: #050505; /* තද කළු (Deep Black) පාටක් */
+            --card-bg: rgba(15, 15, 15, 0.95); /* කාඩ් එකත් තද කළු පැහැයට හැරුණා */
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --whatsapp: #25D366;
+        }
+
+        /* Light Theme Colors (මේක වෙනස් වෙන්නේ නෑ) */
+        [data-theme="light"] {
+            --bg-dark: #f4f4f4;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-light: #111111;
+            --text-gray: #555555;
+            --primary: #ff6600;
+            --primary-glow: rgba(255, 102, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Moving Animated Background Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .shape1 { width: 500px; height: 500px; background: #ff4500; top: -10%; left: -10%; animation: float1 15s infinite alternate ease-in-out; }
+        .shape2 { width: 400px; height: 400px; background: #cc5200; bottom: -10%; right: -5%; animation: float2 12s infinite alternate ease-in-out; }
+        .shape3 { width: 300px; height: 300px; background: #ff8c00; top: 40%; left: 50%; animation: float3 20s infinite alternate ease-in-out; }
+
+        @keyframes float1 { 100% { transform: translate(150px, 100px) scale(1.2); } }
+        @keyframes float2 { 100% { transform: translate(-150px, -100px) scale(1.3); } }
+        @keyframes float3 { 100% { transform: translate(-100px, 150px) scale(1.1); } }
+
+        /* Scroll Reveal Animation Classes */
+        .scroll-reveal { opacity: 0; transform: translateY(60px); transition: all 0.8s ease-out; }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Header & Navigation Menu */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="light"] header {
+            background: rgba(245, 245, 245, 0.85);
+        }
+
+     /* මුළු ලෝගෝ එකේම ප්‍රදේශය */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* "SENIKRO" කියන වචනයට අදාළ කොටස */
+     .logo-area h1 {
+            color: #ff6600; /* මෙතනින් SENIKRO කියන එකේ පාට වෙනස් කරන්න පුළුවන් */
+            font-size: 28px; /* මෙතනින් SENIKRO කියන එකේ සයිස් එක වෙනස් කරන්න පුළුවන් */
+            letter-spacing: 2px; /* අකුරු අතර පරතරය */
+            text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif; /* මෙතනින් Font එක වෙනස් කරන්න පුළුවන් */
+        }
+
+        /* "TRAINING CENTRE" කියන කොටසට අදාළ කොටස */
+        .logo-area span { 
+            color: var(--text-light); /* මෙතනින් TRAINING CENTRE කියන එකේ පාට වෙනස් කරන්න පුළුවන් (උදාහරණයක් ලෙස #ffffff හෝ වෙනත් පාටක්) */
+            font-size: 25px; /* මෙතනින් TRAINING CENTRE කියන එකේ සයිස් එක වෙනස් කරන්න පුළුවන් */
+            font-family: 'Segoe UI', sans-serif; /* මේකටත් වෙනම Font එකක් දෙන්න පුළුවන් */
+            letter-spacing: 1px;
+        }
+
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            margin-left: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 10%;
+            min-height: 60vh;
+        }
+
+        .hero-text { flex: 1; }
+        .hero-text h2 { font-size: 55px; margin-bottom: 20px; line-height: 1.2; }
+        .hero-text h2 span { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
+        .hero-text p {
+            color: var(--text-gray);
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 550px;
+            line-height: 1.6;
+        }
+
+        /* Hero Social Buttons */
+        .hero-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-btn {
+            text-decoration: none;
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        [data-theme="light"] .social-btn {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .social-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px var(--primary-glow);
+            transform: translateY(-3px);
+        }
+
+        .hero-image { flex: 1; display: flex; justify-content: flex-end; }
+        /* Branch Selection */
+        .section-title {
+            text-align: center; font-size: 35px; margin: 60px 0 30px 0;
+            color: var(--primary); text-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .branch-container {
+            display: flex; justify-content: center; gap: 30px; padding: 20px; flex-wrap: wrap;
+        }
+
+        .branch-card {
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            border: 2px solid #444; padding: 40px 60px; border-radius: 30px;
+            font-size: 26px; font-weight: bold; cursor: pointer; color: var(--text-light);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase; letter-spacing: 1px; min-width: 250px; text-align: center;
+        }
+        .branch-card:hover {
+            background: var(--primary); border-color: var(--text-light); color: #fff;
+            transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 30px rgba(255, 102, 0, 0.5);
+        }
+
+        /* Modals */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); z-index: 999;
+            justify-content: center; align-items: center;
+        }
+        @keyframes modalPop { 0% { opacity: 0; transform: scale(0.7) translateY(50px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+
+        .modal-content {
+            background: var(--card-bg); border: 1px solid rgba(255, 102, 0, 0.3);
+            box-shadow: 0 0 40px rgba(255, 102, 0, 0.2); padding: 40px; border-radius: 25px;
+            width: 90%; max-width: 850px; text-align: center; position: relative;
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 90vh; overflow-y: auto;
+            color: var(--text-light);
+        }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--text-gray); cursor: pointer; transition: 0.3s; }
+        .close-btn:hover { color: var(--primary); transform: rotate(90deg); }
+
+        .branch-title-modal { color: var(--primary); font-size: 28px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+
+        #modal-days { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
+        .day-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-light); border: 1px solid var(--primary);
+            padding: 12px 35px; border-radius: 25px; cursor: pointer; font-size: 18px; transition: 0.3s;
+        }
+        [data-theme="light"] .day-btn { background: rgba(0, 0, 0, 0.05); }
+        .day-btn:hover, .day-btn.active { background: var(--primary); color: #fff; box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-3px); }
+
+        #modal-courses { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+        /* Course Box & WhatsApp Button */
+        .course-box {
+            background: var(--card-bg); border: 1px solid #333; border-top: 5px solid var(--primary);
+            padding: 25px; border-radius: 20px; width: 320px; text-align: left; transition: 0.4s;
+            animation: modalPop 0.4s ease forwards; opacity: 0; display: flex; flex-direction: column;
+        }
+        .course-box:hover {
+            transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 25px rgba(255, 102, 0, 0.2);
+        }
+        .course-box h3 { color: var(--primary); font-size: 20px; margin-bottom: 12px; }
+        .course-box p { color: var(--text-gray); font-size: 15px; margin-bottom: 8px; flex-grow: 1; }
+        
+        .wa-btn {
+            display: inline-block; margin-top: 15px; background: var(--whatsapp); color: #fff;
+            text-decoration: none; padding: 10px 15px; border-radius: 20px; font-weight: bold;
+            font-size: 14px; text-align: center; transition: 0.3s; border: none; cursor: pointer;
+        }
+        .wa-btn:hover { background: #1ebe57; transform: scale(1.05); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
+
+        /* Info Buttons Area */
+        .info-buttons { display: flex; justify-content: center; gap: 25px; margin: 80px 0; }
+        .btn {
+            background: var(--card-bg); backdrop-filter: blur(5px); color: var(--text-light);
+            padding: 18px 40px; border: 2px solid var(--primary); border-radius: 40px; font-size: 18px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn:hover { background: var(--primary); color: #fff; box-shadow: 0 0 20px var(--primary-glow); transform: scale(1.05); }
+
+        /* QUIZ SECTION STYLES */
+        .quiz-section {
+            padding: 50px 8%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .quiz-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .quiz-question-text { font-size: 20px; color: var(--text-light); margin-bottom: 25px; font-weight: bold; }
+        .quiz-options { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto; }
+        .quiz-option-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid #444;
+            color: var(--text-light);
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        [data-theme="light"] .quiz-option-btn { background: rgba(0, 0, 0, 0.04); border-color: #ddd; }
+        .quiz-option-btn:hover { background: rgba(255, 102, 0, 0.2); border-color: var(--primary); transform: translateX(5px); }
+
+        /* STUDENT REVIEWS SECTION */
+        .reviews-section { padding: 50px 8%; text-align: center; }
+        .reviews-grid { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 30px; }
+        .review-card {
+            background: var(--card-bg); border: 1px solid rgba(255, 102, 0, 0.25);
+            border-radius: 15px; padding: 25px; width: 300px; text-align: left;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .review-card:hover { transform: translateY(-8px); border-color: var(--primary); }
+        .review-text { font-size: 15px; color: var(--text-gray); line-height: 1.6; font-style: italic; margin-bottom: 20px; }
+        .review-stars { color: #ffb703; font-size: 18px; margin-bottom: 10px; }
+        
+        .student-info { display: flex; align-items: center; gap: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px; }
+        [data-theme="light"] .student-info { border-top-color: rgba(0, 0, 0, 0.1); }
+        .student-avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
+        .student-details h4 { color: var(--text-light); font-size: 16px; margin: 0; }
+        .student-details p { color: var(--text-gray); font-size: 13px; margin: 0; }
+
+        .more-reviews-btn-container { text-align: center; margin-top: 35px; }
+        .more-reviews-btn {
+            background: linear-gradient(135deg, #ff6600 0%, #cc5200 100%); color: #fff; border: none; padding: 12px 30px;
+            border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4); transition: all 0.3s ease;
+        }
+        .more-reviews-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6); }
+
+        .reviews-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 10000; justify-content: center; align-items: center; perspective: 1000px;
+        }
+        .reviews-modal.active { display: flex; }
+        .reviews-modal-content {
+            background: var(--card-bg); border: 1px solid rgba(255, 102, 0, 0.4); border-radius: 20px; width: 90%; max-width: 900px; max-height: 85vh; padding: 30px; overflow-y: auto; position: relative; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 102, 0, 0.2); transform: rotateX(20px) scale(0.8) translateY(50px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: var(--text-light);
+        }
+        .reviews-modal.active .reviews-modal-content { transform: rotateX(0deg) scale(1) translateY(0); opacity: 1; }
+        .clickable-review { cursor: pointer; }
+        .clickable-review:hover { border-color: #ff6600 !important; transform: translateY(-10px) scale(1.02); }
+        .single-review-content { max-width: 550px !important; text-align: center; }
+
+        /* SYLLABUS STYLES */
+        .syllabus-section { padding: 50px 8%; text-align: center; }
+        .modules-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .module-card { background: var(--card-bg); border: 1px solid rgba(255, 102, 0, 0.25); border-radius: 15px; padding: 25px; width: 260px; text-align: left; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .module-card:hover { transform: translateY(-8px); border-color: var(--primary); }
+        .module-icon { font-size: 35px; margin-bottom: 15px; }
+        .module-card h3 { color: var(--primary); font-size: 18px; margin-bottom: 10px; }
+        .module-card p { color: var(--text-gray); font-size: 14px; line-height: 1.5; }
+
+        /* FAQ SECTION STYLES */
+        .faq-section { padding: 50px 8%; max-width: 1200px; margin: 0 auto; }
+        .faq-wrapper { display: flex; gap: 40px; align-items: flex-start; margin-top: 40px; }
+        .faq-list-col { flex: 1.5; display: flex; flex-direction: column; gap: 15px; }
+        .faq-form-col {
+            flex: 1; background: rgba(255, 102, 0, 0.05); border: 1px solid rgba(255, 102, 0, 0.3);
+            border-radius: 15px; padding: 35px 25px; text-align: center; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: sticky; top: 100px;
+        }
+
+        .faq-item { background: var(--card-bg); border: 1px solid rgba(255, 102, 0, 0.25); border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
+        .faq-question { padding: 18px 22px; font-size: 16px; font-weight: bold; color: var(--text-light); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        .faq-question:hover { background: rgba(255, 102, 0, 0.1); color: var(--primary); }
+        .faq-toggle { font-size: 20px; color: var(--primary); transition: transform 0.3s ease; }
+        
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 22px; color: var(--text-gray); font-size: 15px; line-height: 1.6; transition: max-height 0.3s ease, padding 0.3s ease; border-top: 1px solid transparent; }
+        .faq-item.active .faq-answer { max-height: 250px; padding: 15px 22px 20px 22px; border-top-color: rgba(255, 102, 0, 0.15); }
+        .faq-item.active .faq-toggle { transform: rotate(45deg); }
+
+        /* Gallery Styles & Lightbox */
+        .gallery-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 20px 10%; }
+        .gallery-item { width: 280px; height: 180px; border-radius: 15px; overflow: hidden; cursor: pointer; border: 2px solid #333; transition: 0.4s; position: relative; }
+        .gallery-item:hover { border-color: var(--primary); transform: translateY(-8px) scale(1.02); box-shadow: 0 10px 25px rgba(255, 102, 0, 0.4); }
+        .gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; }
+        
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(15px); z-index: 1000; justify-content: center; align-items: center; }
+        .lightbox-content-wrapper { position: relative; max-width: 85%; max-height: 85vh; display: flex; justify-content: center; align-items: center; }
+        .lightbox-img, .lightbox-video { max-width: 100%; max-height: 80vh; border-radius: 15px; border: 2px solid var(--primary); box-shadow: 0 0 30px rgba(255, 102, 0, 0.5); }
+        .lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 102, 0, 0.8); color: white; border: none; font-size: 30px; padding: 10px 20px; cursor: pointer; border-radius: 50%; transition: 0.3s; user-select: none; }
+        .lightbox-btn:hover { background: var(--primary); box-shadow: 0 0 15px var(--primary); }
+        .lightbox-prev { left: -60px; }
+        .lightbox-next { right: -60px; }
+        .lightbox-close { position: absolute; top: -40px; right: 0; font-size: 35px; color: white; cursor: pointer; }
+        
+        /* Copy Bank Details Style */
+        .bank-acc-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 102, 0, 0.3); padding: 12px 15px; border-radius: 10px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 10px 0; width: 100%; box-sizing: border-box; }
+        [data-theme="light"] .bank-acc-box { background: rgba(0, 0, 0, 0.04); }
+        .acc-number { font-size: 18px; font-weight: bold; color: var(--primary); letter-spacing: 1px; word-break: break-all; }
+        .copy-btn { background: #ff6600; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; transition: 0.3s; margin-left: auto; }
+        .copy-btn:hover { background: #e05500; transform: scale(1.05); }
+        .copy-btn.copied { background: #28a745 !important; }
+
+        /* Footer Section */
+        .site-footer { background: #050505; border-top: 1px solid #333; padding: 60px 10% 20px 10%; margin-top: 50px; position: relative; z-index: 10; color: #fff; }
+        [data-theme="light"] .site-footer { background: #1a1a1a; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; margin-bottom: 40px; }
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h3 { color: var(--primary); font-size: 22px; margin-bottom: 20px; }
+        .footer-col h3 span { color: #fff; }
+        .footer-col p { color: var(--text-gray); line-height: 1.8; font-size: 15px; margin-bottom: 10px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { text-decoration: none; color: var(--text-gray); transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--primary); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid #222; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; color: #777; font-size: 14px; }
+        .developer-tag { color: var(--primary); font-weight: bold; }
+
+        /* WHATSAPP FLOATING BUTTON */
+        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 0px 5px 15px rgba(37, 211, 102, 0.4); z-index: 999; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; text-decoration: none; transition: all 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0px 8px 25px rgba(37, 211, 102, 0.6); color: #fff; }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 900px) {
+            .faq-wrapper { flex-direction: column; align-items: stretch; }
+            .faq-list-col, .faq-form-col { width: 100%; flex: none; position: static; }
+            .faq-form-col { margin-top: 20px; }
+        }
+
+        @media screen and (max-width: 768px) {
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; text-align: center; }
+            .nav-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+            .nav-links a { margin-left: 0; font-size: 14px; }
+            .hero { flex-direction: column; padding: 40px 20px; text-align: center; }
+            .hero-text h2 { font-size: 32px !important; }
+            .hero-text p { font-size: 15px !important; margin: 0 auto 20px auto; }
+            .hero-social { justify-content: center; }
+            .countdown-container { margin: 20px auto; }
+            .hero-image { justify-content: center; margin-top: 30px; }
+            .hero-image img { width: 100% !important; max-width: 320px; height: 400px !important; }
+            .branch-card { padding: 25px 30px; font-size: 20px; min-width: 100%; }
+            .modal-content { width: 95%; padding: 20px; }
+            .course-box { width: 100% !important; }
+            .site-footer { padding: 40px 20px 20px 20px; }
+            .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+            .logo-area { flex-wrap: nowrap !important; justify-content: center; width: 100%; }
+            .logo-area h1 { font-size: clamp(14px, 4.5vw, 22px) !important; white-space: nowrap !important; letter-spacing: 0.5px; }
+            .logo-area h1 span { font-size: 0.85em !important; }
+            .logo-area img { height: 38px !important; width: auto !important; }
+            .bank-acc-box { justify-content: space-between; }
+            .copy-btn { margin-left: 0; width: 100%; margin-top: 5px; text-align: center; }
+        }
+/* සාමාන්‍ය PC සහ ලොකු ස්ක්‍රීන් වලට ඔරිජිනල් Orange ෂේප්ස් එකම තියෙනවා */
+        .shape1 { width: 500px; height: 500px; background: #e65c00; top: -10%; left: -10%; animation: float1 15s infinite alternate ease-in-out; }
+        .shape2 { width: 400px; height: 400px; background: #ff7700; bottom: -10%; right: -5%; animation: float2 12s infinite alternate ease-in-out; }
+        .shape3 { width: 300px; height: 300px; background: #cc5200; top: 40%; left: 50%; animation: float3 20s infinite alternate ease-in-out; }
+
+        /* ෆෝන් වලට (Small Screens) විතරක් අර ඕවර් බ්ලෝ වෙන එක නවත්වන්න මේක වැඩ කරයි */
+        @media (max-width: 768px) {
+            .shape1 { background: #222222 !important; }
+            .shape2 { background: #151515 !important; }
+            .shape3 { background: #2c2c2c !important; }
+            .bg-shape { opacity: 0.25; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <header>
+        <div class="logo-area" style="display: flex; align-items: center; gap: 15px;">
+            <img src="logo.png" alt="Logo" style="height: 40px; width: auto; object-fit: contain;">
+            <div>
+                <h1>SENIKRO <span>TRAINING CENTRE</span></h1>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="#branches">Branches</a>
+            <a href="#quiz-section">Level Quiz</a>
+            <a href="#info-section">About & Bank</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#reviews">Reviews</a>
+            <!-- Theme Switch Button -->
+            <button id="themeToggleBtn" onclick="toggleTheme()" style="background: none; border: 1px solid var(--primary); color: var(--text-light); padding: 5px 12px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-left: 15px; transition: 0.3s;">☀️ Light</button>
+        </nav>
+    </header>
+
+    <section class="hero scroll-reveal">
+        <div class="hero-text">
+            <h2>Master Your <br><span>English Skills</span> With Us!</h2>
+            <p>Welcome to SENIKRO Training Centre. We specialize in spoken English and language skill development for kids, teens, and professionals. Experience the best interactive learning environment.</p>
+        
+            <div class="hero-social">
+                <a href="https://web.facebook.com/senikro/about" target="_blank" class="social-btn">Facebook</a>
+                <a href="https://youtube.com/@senikrotrainingcentre?si=z7zGYhD3R4I3JedO" target="_blank" class="social-btn">YouTube</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="sir-01.png" alt="Sir Image" style="width: 380px; height: 480px; object-fit: cover; border-radius: 20px; border: 2px solid #ff6600; box-shadow: 0 15px 40px rgba(255, 102, 0, 0.3);">
+        </div>
+    </section>
+
+    <div id="branches">
+        <h2 class="section-title scroll-reveal">Select Your Nearest Branch</h2>
+        <div class="branch-container scroll-reveal">
+            <div class="branch-card" onclick="openScheduleModal('Kandana')">Kandana</div>
+            <div class="branch-card" onclick="openScheduleModal('Thalawathugoda')">Thalawathugoda</div>
+            <div class="branch-card" onclick="openScheduleModal('Awissawella')">Awissawella</div>
+        </div>
+    </div>
+
+    <!-- Interactive English Level Quiz Section -->
+    <div id="quiz-section" class="quiz-section scroll-reveal">
+        <h2 class="section-title" style="margin-top: 0;">Check Your English Level</h2>
+        <div class="quiz-card">
+            <div id="quiz-container">
+                <div id="quiz-question-box" class="quiz-question-text">ප්‍රශ්නය 1: "She _____ to the office yesterday." මෙහි හිස්තැනට ගැළපෙන නිවැරදි වචනය කුමක්ද?</div>
+                <div id="quiz-options-box" class="quiz-options">
+                    <button class="quiz-option-btn" onclick="checkQuizAnswer(0, 1)">A) go</button>
+                    <button class="quiz-option-btn" onclick="checkQuizAnswer(1, 1)">B) went</button>
+                    <button class="quiz-option-btn" onclick="checkQuizAnswer(2, 1)">C) gone</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-buttons scroll-reveal" id="info-section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; width: 100%; padding: 0 15px; box-sizing: border-box; margin: 25px 0;">
+        <button class="btn" onclick="openModal('teacherModal')" style="flex: 1 1 200px; max-width: 280px; min-width: 160px; text-align: center; box-sizing: border-box;">About Our Master</button>
+        <button class="btn" onclick="openModal('bankModal')" style="flex: 1 1 200px; max-width: 280px; min-width: 160px; text-align: center; box-sizing: border-box;">Bank Details & Branches</button>
+    </div>
+
+    <div id="reviews" class="reviews-section">
+        <h2 class="section-title scroll-reveal">What Our Students Say</h2>
+        <div class="reviews-grid scroll-reveal">
+            <div class="review-card clickable-review" onclick="openFullReview('Kasun Perera', 'Kandana Branch', 'SENIKRO එකට ආවට පස්සේ මගේ Spoken English තත්වය ගොඩක් දියුණු වුණා. Sir ගේ teaching style එක මාරම පැහැදිලියි! මට බය නැතුව ඉංග්‍රීසියෙන් කතා කරන්න පුළුවන් වුණා.')">
+                <div><div class="review-stars">★★★★★</div><p class="review-text">"SENIKRO එකට ආවට පස්සේ මගේ Spoken English තත්වය ගොඩක් දියුණු වුණා..."</p></div>
+                <div class="student-info"><div class="student-avatar">K</div><div class="student-details"><h4>Kasun Perera</h4><p>Kandana Branch</p></div></div>
+            </div>
+            <div class="review-card clickable-review" onclick="openFullReview('Nipuni Silva', 'Thalawathugoda Branch', 'කතා කරන්න තිබුණු බිය සම්පූර්ණයෙන්ම නැති වුණා. Classes ඉතාම friendly සහ interactive. Highly recommended! Sir සෑම ශිෂ්‍යයෙක් කෙරෙහිම පෞද්ගලිකව අවධානය යොමු කරනවා.')">
+                <div><div class="review-stars">★★★★★</div><p class="review-text">"කතා කරන්න තිබුණු බිය සම්පූර්ණයෙන්ම නැති වුණා. Classes ඉතාම friendly..."</p></div>
+                <div class="student-info"><div class="student-avatar">N</div><div class="student-details"><h4>Nipuni Silva</h4><p>Thalawathugoda Branch</p></div></div>
+            </div>
+            <div class="review-card clickable-review" onclick="openFullReview('Dinesh Fernando', 'Awissawella Branch', 'ගොඩක් තැන්වල English ඉගෙනගෙන නැවතුණත් SENIKRO එකෙන් මට හොඳටම English කතා කරන්න පුළුවන් වුණා. Grammar වෙනුවට Practical Spoken එකට මුල සිටම හුරු කළා.')">
+                <div><div class="review-stars">★★★★★</div><p class="review-text">"ගොඩක් තැන්වල English ඉගෙනගෙන නැවතුණත් SENIKRO එකෙන් මට හොඳටම..."</p></div>
+                <div class="student-info"><div class="student-avatar">D</div><div class="student-details"><h4>Dinesh Fernando</h4><p>Awissawella Branch</p></div></div>
+            </div>
+        </div>
+        <div class="more-reviews-btn-container">
+            <button class="more-reviews-btn" onclick="openAllReviewsModal()">✨ More Reviews</button>
+        </div>
+    </div>
+
+    <div id="syllabus" class="syllabus-section">
+        <h2 class="section-title scroll-reveal">What You Will Learn</h2>
+        <div class="modules-grid scroll-reveal">
+            <div class="module-card"><div class="module-icon">🗣️</div><h3>Spoken English Mastery</h3><p>බිය නැතුව එක එල්ලේ ඉංග්‍රීසියෙන් අදහස් ප්‍රකාශ කිරීමට අවශ්‍ය සියලුම Practical Fluency Techniques.</p></div>
+            <div class="module-card"><div class="module-icon">📚</div><h3>Practical Grammar</h3><p>සාම්ප්‍රදායික කටපාඩම් ක්‍රම වෙනුවට කතාවට අවශ්‍ය වෙන අත්‍යවශ්‍ය Grammar Patterns ලේසියෙන්ම ඉගෙනගැනීම.</p></div>
+            <div class="module-card"><div class="module-icon">🎧</div><h3>Listening & Accent</h3><p>ඉංග්‍රීසි භාෂාවෙන් කතා කරන දේවල් ක්ෂණිකව තේරුම් ගැනීමේ සහ නිවැරදි උච්චාරණය (Pronunciation) පුහුණුව.</p></div>
+            <div class="module-card"><div class="module-icon">💼</div><h3>Professional Speaking</h3><p>Interviews, Presentations සහ Job/Business පරිසරයකදී විශ්වාසයෙන් යුතුව English භාවිතය.</p></div>
+        </div>
+    </div>
+
+    <!-- TWO-COLUMN FAQ SECTION -->
+    <div id="faq" class="faq-section">
+        <h2 class="section-title scroll-reveal" style="text-align: center;">Frequently Asked Questions</h2>
+        
+        <div class="faq-wrapper scroll-reveal">
+            
+            <div class="faq-list-col">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Q: Classes තියෙන්නේ Online ද Physical ද?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        A: Kandana, Thalawathugoda සහ Awissawella කියන Branches වල Physical Classes පමණක් පැවැත්වේ.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Q: මට මුල සිටම English බැරි වුණත් Join වෙන්න පුළුවන්ද?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        A: ඔව්, අනිවාර්යයෙන්ම! අපගේ පාඨමාලාව සකසා ඇත්තේ මුල සිටම (Basic level) ඉතාම සරලව ඕනෑම කෙනෙකුට තේරෙන පරිදිය.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Q: Class Fees ගෙවන්න පුළුවන් ක්‍රම මොනවාද?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        A: අපගේ Bank Account එකට Direct Deposit / Online Transfer කිරීමෙන් හෝ කෙළින්ම Branch එකට පැමිණ ගෙවීම් සිදු කළ හැක.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Q: Class කාලසීමාව (Duration) කොපමණද?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        A: පාඨමාලා කාලය මාස 12ක් වේ. වැඩිවිස්තර සඳහා අපව අමතන්න.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-form-col">
+                <h3 style="color: #ff6600; font-size: 22px; margin-bottom: 10px;">Have a Different Question?</h3>
+                <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 25px; line-height: 1.5;">ඔබට දැනගැනීමට අවශ්‍ය ප්‍රශ්නය මෙහි සටහන් කර අප වෙත යොමු කරන්න.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <input type="text" id="userQuestion" placeholder="ඔබේ ප්‍රශ්නය මෙහි Type කරන්න..." style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #444; background: var(--card-bg); color: var(--text-light); font-size: 15px; box-sizing: border-box; outline: none; transition: border 0.3s;">
+                    
+                    <button onclick="sendQuestionToWhatsApp()" style="background: #25d366; color: #fff; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 16px;">
+                        💬 Send Question via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div id="gallery">
+        <h2 class="section-title scroll-reveal">Gallery & Media</h2>
+        <div class="gallery-grid scroll-reveal">
+            <div class="gallery-item" onclick="openLightbox(0)"><img src="photo1.jpeg" alt="Gallery Photo 1"></div>
+            <div class="gallery-item" onclick="openLightbox(1)"><img src="photo2.jpeg" alt="Gallery Photo 2"></div>
+            <div class="gallery-item" onclick="openLightbox(2)"><img src="photo3.png" alt="Gallery Photo 3"></div>
+            <div class="gallery-item" onclick="openLightbox(3)"><video src="video1.mp4" muted></video></div>
+        </div>
+
+        <div class="more-reviews-btn-container scroll-reveal" style="text-align: center; margin-top: 35px;">
+            <button class="more-reviews-btn" onclick="openAllGalleryModal()">📸 More Photos & Videos</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="reviews-modal" id="allGalleryModal">
+        <div class="reviews-modal-content" style="max-width: 1000px;">
+            <span class="close-btn" onclick="closeReviewsModal('allGalleryModal')" style="position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: var(--text-light);">&times;</span>
+            <h2 style="color: #ff6600; margin-bottom: 25px; text-align: center;">More Photos & Videos</h2>
+            
+            <div class="gallery-grid" style="padding: 0;">
+                <div class="gallery-item" onclick="openLightbox(4)"><img src="photo1.jpeg" alt="Extra Photo 1"></div>
+                <div class="gallery-item" onclick="openLightbox(5)"><img src="photo2.jpeg" alt="Extra Photo 2"></div>
+                <div class="gallery-item" onclick="openLightbox(6)"><img src="photo3.png" alt="Extra Photo 3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reviews-modal" id="allReviewsModal">
+        <div class="reviews-modal-content">
+            <span class="close-btn" onclick="closeReviewsModal('allReviewsModal')" style="position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: var(--text-light);">&times;</span>
+            <h2 style="color: #ff6600; margin-bottom: 25px; text-align: center;">All Student Reviews</h2>
+            <div class="reviews-grid" style="margin-top: 0;">
+                <div class="review-card clickable-review" onclick="openFullReview('Kasun Perera', 'Kandana Branch', 'SENIKRO එකට ආවට පස්සේ මගේ Spoken English තත්වය ගොඩක් දියුණු වුණා. Sir ගේ teaching style එක මාරම පැහැදිලියි!')">
+                    <div><div class="review-stars">★★★★★</div><p class="review-text">"SENIKRO එකට ආවට පස්සේ මගේ Spoken English..."</p></div>
+                    <div class="student-info"><div class="student-avatar">K</div><div class="student-details"><h4>Kasun Perera</h4><p>Kandana</p></div></div>
+                </div>
+                <div class="review-card clickable-review" onclick="openFullReview('Nipuni Silva', 'Thalawathugoda Branch', 'කතා කරන්න තිබුණු බිය සම්පූර්ණයෙන්ම නැති වුණා. Classes ඉතාම friendly සහ interactive.')">
+                    <div><div class="review-stars">★★★★★</div><p class="review-text">"කතා කරන්න තිබුණු බිය සම්පූර්ණයෙන්ම..."</p></div>
+                    <div class="student-info"><div class="student-avatar">N</div><div class="student-details"><h4>Nipuni Silva</h4><p>Thalawathugoda</p></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reviews-modal" id="singleReviewModal">
+        <div class="reviews-modal-content single-review-content">
+            <span class="close-btn" onclick="closeReviewsModal('singleReviewModal')" style="position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: var(--text-light);">&times;</span>
+            <div class="review-stars" style="font-size: 25px;">★★★★★</div>
+            <p id="modalReviewText" style="font-size: 18px; color: var(--text-light); line-height: 1.8; font-style: italic; margin: 20px 0;"></p>
+            <div style="border-top: 1px solid rgba(255,102,0,0.3); padding-top: 15px;">
+                <h3 id="modalStudentName" style="color: #ff6600; margin: 0;"></h3>
+                <p id="modalStudentBranch" style="color: var(--text-gray); margin-top: 5px;"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content-wrapper">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <button class="lightbox-btn lightbox-prev" onclick="changeMedia(-1)">&#10094;</button>
+            <div id="lightbox-media-container"></div>
+            <button class="lightbox-btn lightbox-next" onclick="changeMedia(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="modal" id="scheduleModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('scheduleModal')">&times;</span>
+            <h2 class="branch-title-modal" id="modalBranchTitle">Branch Name</h2>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Select a day to view available classes.</p>
+            <div id="modal-days"></div>
+            <div id="modal-courses"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="teacherModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('teacherModal')">&times;</span>
+            <h2 class="branch-title-modal">About The Master</h2>
+            <p style="color: var(--text-gray); line-height: 1.8; font-size: 18px;">
+                Meet our expert English instructor with years of experience in Toastmasters, IELTS, and English Literature. 
+                He has transformed thousands of students into confident public speakers! <br><br>
+                <strong>CHUNDIKA ARIYAWANSA (Chief Resource Person | Corporate Trainer | Psychological Counsellor) is a highly versatile and experienced educator, trainer, and psychological counsellor dedicated to empowering individuals through holistic learning, professional development, and mental well-being.
+
+With a rich academic background and extensive practical experience, he combines modern management strategies, effective communication techniques, and psychological insights to create transformative learning experiences for students and professionals alike.
+
+Qualifications & Credentials
+MBA (PIM)
+
+AMCIPM | AMIBSL | MAAT
+
+Cert. Trainer (City & Guilds - UK)
+
+Distinguished Toastmaster (TMI - USA)
+
+Psychological Counsellor
+
+Yoga Shiromani
+
+Dip in English (SJVC)
+
+Areas of Expertise
+Corporate & Skill Training: Delivering professional development programs tailored to personal and career growth.
+
+Psychological Counselling: Providing guidance and mental wellness support for individuals to overcome challenges and unlock their true potential.
+
+Public Speaking & Communication: Helping learners master English language fluency and effective presentation skills.
+
+Mindfulness & Holistic Well-being: Integrating yoga and mindfulness principles for balanced personal growth.
+            </p>
+        </div>
+    </div>
+
+    <div class="modal" id="bankModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('bankModal')">&times;</span>
+            <h2 class="branch-title-modal">Bank Details & Contact</h2>
+            <div style="color: var(--text-gray); text-align: left; line-height: 2; font-size: 18px; background: rgba(0,0,0,0.04); padding: 30px; border-radius: 15px;">
+                <p><strong>Bank Name:</strong> Sampath Bank</p>
+                <p><strong>Account Name:</strong> Senikro Training Centre</p>
+                <div class="bank-acc-box">
+                    <span><strong>Account No:</strong></span>
+                    <span class="acc-number" id="accNum">002011003068</span>
+                    <button class="copy-btn" onclick="copyAccNumber(this)">Copy Number</button>
+                </div>
+                <p><strong>Branch:</strong> Eheliyagoda</p>
+                <hr style="border-color: #444; margin: 20px 0;">
+                <p>📍 <strong>Kandana Branch:</strong> 23 Church Rd, Kandana 11320</p>
+                <p>📍 <strong>Thalawathugoda:</strong> No.290U Salinda dissanayaka Mw, Ruhunupura 10116</p>
+                <p>📍 <strong>Awissawella:</strong> Highlevel Road, Awissawella.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer scroll-reveal">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>SENIKRO <span>TRAINING CENTRE</span></h3>
+                <p>Your trusted partner for all spoken English and language development needs in Sri Lanka, providing quality education and an exceptional learning environment.</p>
+            </div>
+            <div class="footer-col">
+                <h3 style="color: var(--text-light);">Quick Links</h3>
+                <ul>
+                    <li><a href="#branches">Branches & Courses</a></li>
+                    <li><a href="#quiz-section">English Quiz</a></li>
+                    <li><a href="#info-section">About The Master</a></li>
+                    <li><a href="#gallery">Media Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 style="color: var(--text-light);">Contact Us</h3>
+                <p>📍 <strong>Main Branch:</strong> 23 Church Rd, Kandana 11320</p>
+                <p>📞 <strong>Phone:</strong> 071 418 7300 / 071 475 6319</p>
+                <p>📧 <strong>Email:</strong> senikrotrainingcentre@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SENIKRO TRAINING CENTRE. All Rights Reserved.</p>
+            <p>Designed & Developed by <span class="developer-tag">THENUKZ</span></p>
+        </div>
+ </footer>
+<!-- 2. ඊටපස්සේ ඔයාගේ Schedule Data එකට වෙනම Script ටැග් එකක් පාවිච්චි කරන්න -->
+<script>
+    const scheduleData = {
+        "Kandana": {
+            "Monday": [
+                { title: "Spoken English", time: "10:00 AM - 12:00 PM", target: "Open to all" },
+                { title: "English Language Skill Dev.", time: "2:30 PM - 4:30 PM", target: "Age 7-10" },
+                { title: "Public Speaking (Advanced)", time: "4:30 PM - 6:30 PM", target: "Age 10-16" },
+                { title: "Public Speaking for Adults", time: "6:30 PM - 8:30 PM", target: "Age 18+" }
+            ],
+            "Thursday": [
+                { title: "English Language Skill Dev.", time: "2:30 PM - 4:30 PM", target: "Age 7-10" },
+                { title: "Public Speaking (Basic)", time: "4:30 PM - 6:30 PM", target: "Age 8-16" },
+                { title: "Public Speaking for Adults", time: "6:30 PM - 8:30 PM", target: "Age 18+" }
+            ]
+        },
+            "Thalawathugoda": {
+                "Wednesday": [
+                    { title: "O/L English Literature", time: "4:00 PM - 6:00 PM", target: "Age 14-16" },
+                    { title: "Smart Presenter", time: "6:00 PM - 8:00 PM", target: "Adults" }
+                ],
+                "Saturday": [
+                    { title: "Kids Playshop", time: "8:00 AM - 10:00 AM", target: "Age 6-8" },
+                    { title: "English Literature for Kids", time: "10:00 AM - 12:00 PM", target: "Age 9-12" },
+                    { title: "O/L English Literature", time: "1:30 PM - 3:30 PM", target: "Age 14-16" },
+                    { title: "Toastmaster Program", time: "3:30 PM - 5:30 PM", target: "Age 9-17" },
+                    { title: "Smart Presenter", time: "6:00 PM - 8:00 PM", target: "Adults" }
+                ]
+            },
+            "Awissawella": {
+                "Tuesday": [
+                    { title: "Adults Spoken English", time: "10:00 AM - 12:00 PM", target: "Age 18+ (03 Months)" },
+                    { title: "English for Kids", time: "1:00 PM - 3:00 PM", target: "Age 6-7" },
+                    { title: "A/L General English", time: "3:30 PM - 5:30 PM", target: "A/L Students" },
+                    { title: "English Language", time: "5:30 PM - 7:30 PM", target: "Age 12-14" }
+                ],
+                "Friday": [
+                    { title: "Adults Spoken English", time: "10:00 AM - 12:00 PM", target: "Age 18+ (03 Months)" },
+                    { title: "English for Kids", time: "3:30 PM - 5:30 PM", target: "Age 10-12" },
+                    { title: "O/L General English", time: "3:30 PM - 5:30 PM", target: "Age 16-17" }
+                ],
+                "Sunday": [
+                    { title: "Public Speaking with Toastmaster", time: "6:00 PM - 8:00 PM", target: "Age 8-16" }
+                ]
+            }
+        };
+
+        // Theme Toggle Logic
+        function toggleTheme() {
+            const htmlTag = document.documentElement;
+            const btn = document.getElementById('themeToggleBtn');
+            
+            if (htmlTag.getAttribute('data-theme') === 'light') {
+                htmlTag.removeAttribute('data-theme');
+                btn.innerText = '☀️ Light';
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--text-light)';
+            } else {
+                htmlTag.setAttribute('data-theme', 'light');
+                btn.innerText = '🌙 Dark';
+                btn.style.background = 'var(--primary)';
+                btn.style.color = '#fff';
+            }
+        }
+        // Quiz Logic
+        const quizQuestions = [
+            { q: 'ප්‍රශ්නය 1: "She _____ to the office yesterday." මෙහි හිස්තැනට ගැළපෙන නිවැරදි වචනය කුමක්ද?', options: ['A) go', 'B) went', 'C) gone'], correct: 1 },
+            { q: 'ප්‍රශ්නය 2: "They _____ playing cricket now."', options: ['A) is', 'B) are', 'C) was'], correct: 1 },
+            { q: 'ප්‍රශ්නය 3: "If I have money, I _____ a car."', options: ['A) will buy', 'B) bought', 'C) buy'], correct: 0 }
+        ];
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        function checkQuizAnswer(selectedOption, correctIndex) {
+            if (selectedOption === quizQuestions[currentQuizIndex].correct) { quizScore++; }
+            currentQuizIndex++;
+            const qBox = document.getElementById('quiz-question-box');
+            const oBox = document.getElementById('quiz-options-box');
+
+            if (currentQuizIndex < quizQuestions.length) {
+                qBox.innerText = quizQuestions[currentQuizIndex].q;
+                oBox.innerHTML = '';
+                quizQuestions[currentQuizIndex].options.forEach((opt, idx) => {
+                    oBox.innerHTML += `<button class="quiz-option-btn" onclick="checkQuizAnswer(${idx})">${opt}</button>`;
+                });
+            } else {
+                qBox.innerText = `🎉 Quiz එක අවසන්! ඔබේ ලකුණු: ${quizScore} / ${quizQuestions.length}`;
+                const waText = encodeURIComponent(`Hi SENIKRO! මම English Level Quiz එක කළා. මගේ ලකුණු ${quizScore}/${quizQuestions.length} ක් ආවා. මට ගැලපෙන class එකක් ගැන දැනගන්න ඕන.`);
+                oBox.innerHTML = `<a href="https://wa.me/94714187300?text=${waText}" target="_blank" class="wa-btn" style="text-align:center; padding: 15px; font-size:16px;">💬 Join WhatsApp Class via Result</a>`;
+            }
+        }
+
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); } 
+                else { entry.target.classList.remove('active'); }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.scroll-reveal').forEach((el) => { observer.observe(el); });
+
+        function openScheduleModal(branch) {
+            document.getElementById('modalBranchTitle').innerText = branch + " Branch";
+            const daysContainer = document.getElementById('modal-days');
+            const coursesContainer = document.getElementById('modal-courses');
+            daysContainer.innerHTML = ''; coursesContainer.innerHTML = '';
+
+            const branchDays = Object.keys(scheduleData[branch]);
+            branchDays.forEach(day => {
+                const btn = document.createElement('button');
+                btn.className = 'day-btn'; btn.innerText = day;
+                btn.onclick = () => loadCoursesInModal(branch, day, btn);
+                daysContainer.appendChild(btn);
+            });
+            openModal('scheduleModal');
+        }
+
+        const myWhatsappNumber = "94714187300"; 
+
+        function loadCoursesInModal(branch, day, element) {
+            document.querySelectorAll('#modal-days .day-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            const coursesContainer = document.getElementById('modal-courses');
+            coursesContainer.innerHTML = '';
+            const courses = scheduleData[branch][day];
+
+            courses.forEach((course, index) => {
+                const box = document.createElement('div');
+                box.className = 'course-box';
+                box.style.animationDelay = `${index * 0.1}s`;
+                const textMessage = `Hi SENIKRO! I want to join the "${course.title}" class on ${day} at the ${branch} branch.`;
+                const whatsappLink = `https://wa.me/${94714187300}?text=${encodeURIComponent(textMessage)}`;
+
+                box.innerHTML = `
+                    <h3>${course.title}</h3>
+                    <p>🕒 <strong>Time:</strong> ${course.time}</p>
+                    <p>🎯 <strong>Target:</strong> ${course.target}</p>
+                    <a href="${whatsappLink}" target="_blank" class="wa-btn">💬 Send WhatsApp Msg</a>
+                `;
+                coursesContainer.appendChild(box);
+            });
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = "none"; } }
+
+        let currentMediaIndex = 0;
+        function getMediaItems() { return document.querySelectorAll('.gallery-item img, .gallery-item video'); }
+        function openLightbox(index) { currentMediaIndex = index; document.getElementById('lightbox').style.display = 'flex'; showMedia(currentMediaIndex); }
+        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.getElementById('lightbox-media-container').innerHTML = ''; }
+        function showMedia(index) {
+            const mediaItems = getMediaItems();
+            if (index >= mediaItems.length) currentMediaIndex = 0;
+            if (index < 0) currentMediaIndex = mediaItems.length - 1;
+            const selectedMedia = mediaItems[currentMediaIndex];
+            const container = document.getElementById('lightbox-media-container');
+            container.innerHTML = '';
+            if (selectedMedia.tagName === 'IMG') {
+                const img = document.createElement('img'); img.src = selectedMedia.src; img.className = 'lightbox-img'; container.appendChild(img);
+            } else if (selectedMedia.tagName === 'VIDEO') {
+                const video = document.createElement('video'); video.src = selectedMedia.src; video.controls = true; video.autoplay = true; video.className = 'lightbox-video'; container.appendChild(video);
+            }
+        }
+        function changeMedia(direction) { currentMediaIndex += direction; showMedia(currentMediaIndex); }
+
+        function copyAccNumber(buttonElement) {
+            const accNumber = document.getElementById('accNum').innerText;
+            navigator.clipboard.writeText(accNumber).then(() => {
+                buttonElement.innerText = 'Copied! ✓';
+                buttonElement.classList.add('copied');
+                setTimeout(() => { buttonElement.innerText = 'Copy Number'; buttonElement.classList.remove('copied'); }, 2000);
+            });
+        }
+
+        function openAllReviewsModal() { document.getElementById('allReviewsModal').classList.add('active'); }
+        function openAllGalleryModal() { document.getElementById('allGalleryModal').classList.add('active'); }
+        function closeReviewsModal(modalId) { document.getElementById(modalId).classList.remove('active'); } 
+        function openFullReview(name, branch, fullMessage) {
+            document.getElementById('modalStudentName').innerText = name;
+            document.getElementById('modalStudentBranch').innerText = branch;
+            document.getElementById('modalReviewText').innerText = `"${fullMessage}"`;
+            document.getElementById('singleReviewModal').classList.add('active');
+        }
+
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) item.classList.remove('active');
+            });
+            faqItem.classList.toggle('active');
+        }
+
+        function sendQuestionToWhatsApp() {
+            const question = document.getElementById('userQuestion').value;
+            if (question.trim() === "") { alert("කරුණාකර ඔබේ ප්‍රශ්නය ඇතුළත් කරන්න."); return; }
+            const encodedMsg = encodeURIComponent(`Hello SENIKRO! මට මේ ප්‍රශ්නය දැනගැනීමට අවශ්‍යයි: "${question}"`);
+            window.open(`https://wa.me/${94714187300}?text=${encodedMsg}`, '_blank');
+        }
+    </script>
+
+    <a href="https://wa.me/94714187300?text=Hello%20SENIKRO!%20I%20would%20like%20to%20get%20more%20information%20about%20classes." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="#25d366" stroke="#25d366"/>
+            <path d="M16.5 14.5c-.3-.2-1.7-.9-2-.9s-.5.1-.7.3-.8.9-1 .9-.4-.1-.7-.3a8.1 8.1 0 0 1-2.5-2.5c-.2-.3-.1-.5 0-.7s.3-.8.4-1c.1-.2 0-.4-.1-.5s-.7-1.7-.9-2.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.9 1.2 3.4 1.4 3.6 2.4 3.7 5.8 5.1c.8.3 1.4.5 1.9.7.8.2 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8s-.4-.3-.7-.5z" fill="#fff"/>
+        </svg>
+    </a>
+</body>
+</html>
